@@ -97,6 +97,7 @@ public class Enemy extends BaseActor {
     public void chaseTheHero(List<Vector2> path) {
         if(!(isReturningToTheStartPoint && getStartPoint().dst(new Vector2(getCenterX(), getCenterY())) > 600)) {
             isChasingTheHero = true;
+            isReturningToTheStartPoint = false;
             this.path = path;
             nodeIndex = 1;
         }

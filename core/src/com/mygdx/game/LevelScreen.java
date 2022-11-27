@@ -67,7 +67,6 @@ public class LevelScreen extends BaseScreen {
         }
 
 
-
         for (BaseActor solid : BaseActor.getList(mainStage, Solid.class))
         {
             hero.preventOverlap(solid);
@@ -77,24 +76,28 @@ public class LevelScreen extends BaseScreen {
             hero.preventOverlap(wall);
         }
 
+        enemy.preventOverlap(hero);
 
         //обработка перемещений врагов
         if(enemy.getStartPoint().dst(new Vector2(enemy.getCenterX(), enemy.getCenterY())) > 800) {
             enemy.returnToTheStartPoint(pathFinder.findPath(enemy.getCenterX(), enemy.getCenterY(), enemy.getStartPoint().x, enemy.getStartPoint().y));
+            System.out.println("Case 1");
         }
         else if(enemy.isWithinDistance(400, hero) &&
         enemy.getStartPoint().dst(new Vector2(enemy.getCenterX(), enemy.getCenterY())) < 5) {
             enemy.chaseTheHero(pathFinder.findPath(enemy.getCenterX(), enemy.getCenterY(), hero.getCenterX(), hero.getCenterY()));
+            System.out.println("Case 2");
         }
-        else if(enemy.getIsReturningToTheStartPoint() &&
-        enemy.isWithinDistance(200, hero)) {
+        else if(enemy.getIsReturningToTheStartPoint() && enemy.isWithinDistance(200, hero) &&
+                Gdx.input.isKeyPressed(Input.Keys.ANY_KEY)) {
             enemy.chaseTheHero(pathFinder.findPath(enemy.getCenterX(), enemy.getCenterY(), hero.getCenterX(), hero.getCenterY()));
+            System.out.println("Case 3");
         }
         else if(enemy.getIsChasingTheHero() && Gdx.input.isKeyPressed(Input.Keys.ANY_KEY)) {
             enemy.setPath(pathFinder.findPath(enemy.getCenterX(), enemy.getCenterY(), hero.getCenterX(), hero.getCenterY()));
+            System.out.println("Case 4");
         }
 
-        enemy.printPath();
 
     }
 
