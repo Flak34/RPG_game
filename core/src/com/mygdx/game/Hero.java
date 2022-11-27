@@ -10,8 +10,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.Array;
 import com.mygdx.game.framework.BaseActor;
 
-public class Hero extends BaseActor {
-
+public class Hero extends BaseActor implements Attackable {
     Animation walking_north;
     Animation walking_south;
     Animation walking_east;
@@ -55,11 +54,15 @@ public class Hero extends BaseActor {
         else
         {
             setAnimationPaused(false);
+
+            if(isAttacking) {
+                setSpeed(0);
+            }
+
             if (facingAngle == 90)
             {
                 if(isAttacking) {
                     setAnimation(attack_north);
-                    setSpeed(0);
                 }
                 else {
                     setAnimation(walking_north);
@@ -69,7 +72,6 @@ public class Hero extends BaseActor {
             {
                 if(isAttacking) {
                     setAnimation(attack_west);
-                    setSpeed(0);
                 }
                 else
                     setAnimation(walking_west);
@@ -78,7 +80,6 @@ public class Hero extends BaseActor {
             {
                 if(isAttacking) {
                     setAnimation(attack_south);
-                    setSpeed(0);
                 }
                 else
                     setAnimation(walking_south);
@@ -87,14 +88,15 @@ public class Hero extends BaseActor {
             {
                 if(isAttacking) {
                     setAnimation(attack_east);
-                    setSpeed(0);
                 }
                 else
                     setAnimation(walking_east);
             }
 
-            if(isAttacking && isAnimationFinished())
+            if(isAttacking && isAnimationFinished()) {
                 isAttacking = false;
+            }
+
         }
 
         alignCamera();
@@ -103,7 +105,6 @@ public class Hero extends BaseActor {
     }
 
     public void attack() {
-
         setSpeed(0);
         setAnimationPaused(true);
         isAttacking = true;

@@ -4,18 +4,12 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.MapProperties;
-import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
-import com.badlogic.gdx.math.Polygon;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.mygdx.game.framework.BaseActor;
 import com.mygdx.game.framework.BaseScreen;
 import com.mygdx.game.framework.TilemapActor;
-import com.mygdx.game.gameai.gamepf.GameGraph;
 import com.mygdx.game.gameai.gamepf.GamePathFinder;
-
-import java.util.List;
 
 public class LevelScreen extends BaseScreen {
 
@@ -46,7 +40,7 @@ public class LevelScreen extends BaseScreen {
         MapObject startPoint = tma.getRectangleList("start").get(0);
         MapProperties startProps = startPoint.getProperties();
         hero = new Hero( (float)startProps.get("x"), (float)startProps.get("y"), mainStage);
-        enemy = new Enemy(900, 900, mainStage, pathFinder.findPath(900, 900, hero.getX(), hero.getY()));
+        enemy = new Enemy(900, 900, mainStage);
 
 
     }
@@ -54,28 +48,25 @@ public class LevelScreen extends BaseScreen {
     @Override
     public void update(float dt) {
 
-
-
         if (Gdx.input.isKeyPressed(Input.Keys.A)) {
             hero.accelerateAtAngle(180);
             hero.setFacingAngle(180);
-            enemy.updatePath(pathFinder.findPath(enemy.getCenterX(), enemy.getCenterY(), hero.getCenterX(), hero.getCenterY()));
         }
         if (Gdx.input.isKeyPressed(Input.Keys.D)) {
             hero.accelerateAtAngle(0);
             hero.setFacingAngle(0);
-            enemy.updatePath(pathFinder.findPath(enemy.getCenterX(), enemy.getCenterY(), hero.getCenterX(), hero.getCenterY()));
+
         }
         if (Gdx.input.isKeyPressed(Input.Keys.W)) {
             hero.accelerateAtAngle(90);
             hero.setFacingAngle(90);
-            enemy.updatePath(pathFinder.findPath(enemy.getCenterX(), enemy.getCenterY(), hero.getCenterX(), hero.getCenterY()));
         }
         if (Gdx.input.isKeyPressed(Input.Keys.S)) {
             hero.accelerateAtAngle(270);
             hero.setFacingAngle(270);
-            enemy.updatePath(pathFinder.findPath(enemy.getCenterX(), enemy.getCenterY(), hero.getCenterX(), hero.getCenterY()));
         }
+
+
 
         for (BaseActor solid : BaseActor.getList(mainStage, Solid.class))
         {
@@ -85,8 +76,25 @@ public class LevelScreen extends BaseScreen {
         {
             hero.preventOverlap(wall);
         }
-        enemy.printPath();
 
+
+        //обработка перемещений врагов
+        if(enemy.getStartPoint().dst(new Vector2(enemy.getCenterX(), enemy.getCenterY())) > 800) {
+            enemy.returnToTheStartPoint(pathFinder.findPath(enemy.getCenterX(), enemy.getCenterY(), enemy.getStartPoint().x, enemy.getStartPoint().y));
+        }
+        else if(enemy.isWithinDistance(400, hero) &&
+        enemy.getStartPoint().dst(new Vector2(enemy.getCenterX(), enemy.getCenterY())) < 5) {
+            enemy.chaseTheHero(pathFinder.findPath(enemy.getCenterX(), enemy.getCenterY(), hero.getCenterX(), hero.getCenterY()));
+        }
+        else if(enemy.getIsReturningToTheStartPoint() &&
+        enemy.isWithinDistance(200, hero)) {
+            enemy.chaseTheHero(pathFinder.findPath(enemy.getCenterX(), enemy.getCenterY(), hero.getCenterX(), hero.getCenterY()));
+        }
+        else if(enemy.getIsChasingTheHero() && Gdx.input.isKeyPressed(Input.Keys.ANY_KEY)) {
+            enemy.setPath(pathFinder.findPath(enemy.getCenterX(), enemy.getCenterY(), hero.getCenterX(), hero.getCenterY()));
+        }
+
+        enemy.printPath();
 
     }
 
@@ -98,7 +106,6 @@ public class LevelScreen extends BaseScreen {
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
         hero.attack();
-        //return super.touchDown(screenX, screenY, pointer, button);
         return false;
     }
 
