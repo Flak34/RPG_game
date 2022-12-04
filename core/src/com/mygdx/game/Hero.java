@@ -29,8 +29,10 @@ public class Hero extends Unit {
         setAcceleration(400);
         setMaxSpeed(100);
         setDeceleration(400);
-
         scaleBy(1f);
+
+        MaxHP = 200;
+        HP = MaxHP;
 
     }
 
@@ -43,22 +45,7 @@ public class Hero extends Unit {
     }
 
 
-    @Override
-    public void setBoundaryPolygon(int numSides) {
-        float w = getWidth();
-        float h = getHeight();
 
-        float[] vertices = new float[2*numSides];
-        for (int i = 0; i < numSides; i++)
-        {
-            float angle = i * 6.28f / numSides;
-            // x-coordinate
-            vertices[2*i] = ((w * 0.2f)/2 * MathUtils.cos(angle)) + w/2;
-            // y-coordinate
-            vertices[2*i+1] = ((h * 0.3f))/2 * MathUtils.sin(angle) + h/3;
-        }
-        setBoundaryPolygon(new Polygon(vertices));
-    }
 
 
 

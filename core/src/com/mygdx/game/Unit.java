@@ -4,6 +4,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.math.Polygon;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.Array;
@@ -21,8 +23,14 @@ public abstract class Unit extends BaseActor {
     float facingAngle;
     boolean isAttacking;
 
+    protected float HP;
+    protected float MaxHP;
+
     public Unit(float x, float y, Stage s) {
         super(x, y, s);
+
+        MaxHP = 100;
+        HP = MaxHP;
     }
 
 
@@ -193,17 +201,29 @@ public abstract class Unit extends BaseActor {
         this.facingAngle = facingAngle;
     }
 
-    public float getCenterX() {
-        return getX() + getWidth() / 2;
-    }
-
-    public float getCenterY() {
-        return getY() + getHeight() / 2;
-    }
-
     public Vector2 getPathCoordinates() {
-        return new Vector2(getX() + getWidth() / 2, getY() + getHeight() / 5);
+        return new Vector2(getX() + getWidth() / 2, getY() + getHeight() / 4);
+    }
+
+    @Override
+    public void setBoundaryPolygon(int numSides) {
+        float w = getWidth();
+        float h = getHeight();
+
+        float[] vertices = new float[2*numSides];
+        for (int i = 0; i < numSides; i++)
+        {
+            float angle = i * 6.28f / numSides;
+            // x-coordinate
+            vertices[2*i] = ((w * 0.2f)/2 * MathUtils.cos(angle)) + w/2;
+            // y-coordinate
+            vertices[2*i+1] = ((h * 0.3f))/2 * MathUtils.sin(angle) + h/3;
+        }
+        setBoundaryPolygon(new Polygon(vertices));
     }
 
 
+    public void takeDamage(float amount) {
+        HP -= amount;
+    }
 }

@@ -2,14 +2,10 @@ package com.mygdx.game;
 
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.mygdx.game.framework.BaseActor;
-import com.mygdx.game.gameai.gamepf.GameGraph;
-import com.mygdx.game.gameai.gamepf.GameGraphPath;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class Enemy extends Unit {
+public class Sceleton extends Unit {
 
     private List<Vector2> path;
     public int num;
@@ -19,7 +15,7 @@ public class Enemy extends Unit {
     private boolean isChasingTheHero;
 
 
-    public Enemy(float x, float y, Stage s) {
+    public Sceleton(float x, float y, Stage s) {
 
         super(x,y,s);
         load_walk_animation("sceleton_walking", 8);
@@ -47,12 +43,11 @@ public class Enemy extends Unit {
         super.act(dt);
 
         if(path != null) {
-            System.out.println("l;kl;jlkjklj");
-            float angle = new Vector2(path.get(nodeIndex).x - getCenterX(), path.get(nodeIndex).y - getCenterY()).angleDeg();
+            float angle = new Vector2(path.get(nodeIndex).x - getPathCoordinates().x, path.get(nodeIndex).y - getPathCoordinates().y).angleDeg();
             accelerateAtAngle(angle);
             applyPhysics(dt);
             boundToWorld();
-            float currentDst = new Vector2(getCenterX(), getCenterY()).dst(path.get(nodeIndex));
+            float currentDst = new Vector2(getPathCoordinates().x, getPathCoordinates().y).dst(path.get(nodeIndex));
 
             if (currentDst < Math.abs(getSpeed() * dt - currentDst) && nodeIndex < path.size() - 1) {
                 nodeIndex++;
@@ -60,6 +55,7 @@ public class Enemy extends Unit {
             else if(currentDst < Math.abs(getSpeed() * dt - currentDst) && nodeIndex == path.size() - 1) {
                 path = null;
             }
+
 
         }
     }

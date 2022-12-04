@@ -2,17 +2,19 @@ package com.mygdx.game;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
-import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.framework.BaseActor;
 import com.mygdx.game.framework.BaseScreen;
 import com.mygdx.game.framework.TilemapActor;
 import com.mygdx.game.gameai.gamepf.GamePathFinder;
 
+import java.awt.*;
 import java.util.ArrayList;
-import java.util.List;
 
 public class LevelScreen extends BaseScreen {
 
@@ -20,7 +22,8 @@ public class LevelScreen extends BaseScreen {
 
     GamePathFinder pathFinder;
 
-    private ArrayList<Enemy> enemies;
+    private ArrayList<Sceleton> sceletons;
+
 
     @Override
     public void initialize() {
@@ -39,19 +42,20 @@ public class LevelScreen extends BaseScreen {
                     mainStage);
         }
 
+        //добавление врагов на карту
+        sceletons = new ArrayList<>();
+        for(MapObject enemyStartPoint: tma.getRectangleList("enemyStart")) {
+            MapProperties enemyStartProps = enemyStartPoint.getProperties();
+            count++;
+            sceletons.add(new Sceleton((float) enemyStartProps.get("x"), (float)enemyStartProps.get("y"), mainStage));
+        }
+
+
         //добавление главного героя на карту
         MapObject startPoint = tma.getRectangleList("start").get(0);
         MapProperties startProps = startPoint.getProperties();
         hero = new Hero( (float)startProps.get("x"), (float)startProps.get("y"), mainStage);
-
-        //добавление врагов на карту
-        enemies = new ArrayList<>();
-        for(MapObject enemyStartPoint: tma.getRectangleList("enemyStart")) {
-            MapProperties enemyStartProps = enemyStartPoint.getProperties();
-            count++;
-            enemies.add(new Enemy((float) enemyStartProps.get("x"), (float)enemyStartProps.get("y"), mainStage));
-        }
-
+        hero.setZIndex(5);
 
     }
 
@@ -74,31 +78,35 @@ public class LevelScreen extends BaseScreen {
         for (BaseActor wall : BaseActor.getList(mainStage, Wall.class))
         {
             hero.preventOverlap(wall);
+            for(Sceleton sceleton: sceletons) {
+                sceleton.preventOverlap(wall);
+                sceleton.preventOverlap(hero);
+                hero.preventOverlap(sceleton);
+                if(sceleton.getY() > hero.getY())
+                    sceleton.setZIndex(1);
+                else
+                    sceleton.setZIndex(6);
+            }
         }
 
-        for(Enemy enemy: enemies) {
+
+
+        for(Sceleton sceleton : sceletons) {
             //обработка перемещений врагов
-
-
-            /*if (enemy.getStartPoint().dst(new Vector2(enemy.getCenterX(), enemy.getCenterY())) > 500) {
-                enemy.returnToTheStartPoint(pathFinder.findPath(enemy.getCenterX(), enemy.getCenterY(), enemy.getStartPoint().x, enemy.getStartPoint().y));
-                //enemy.printPath();
-                BaseActor actor;
-            }*/
-
-
-            if (enemy.getPathCoordinates().dst(hero.getPathCoordinates()) < 400 && enemy.getStartPoint().dst(enemy.getPathCoordinates()) < 100) {
-                enemy.chaseTheHero(pathFinder.findPath(enemy.getCenterX(), enemy.getCenterY(), hero.getCenterX(), hero.getCenterY()));
-                System.out.println(";ldmfl;emrl;ferf");
+            if (sceleton.getPathCoordinates().dst(hero.getPathCoordinates()) < 400 && sceleton.getStartPoint().dst(sceleton.getPathCoordinates()) < 100) {
+                sceleton.chaseTheHero(pathFinder.findPath(sceleton.getPathCoordinates().x, sceleton.getPathCoordinates().y, hero.getPathCoordinates().x, hero.getPathCoordinates().y));
             }
-            else if (enemy.getIsChasingTheHero() && Gdx.input.isKeyPressed(Input.Keys.ANY_KEY)) {
-                enemy.setPath(pathFinder.findPath(enemy.getCenterX(), enemy.getCenterY(), hero.getCenterX(), hero.getCenterY()));
+            else if (sceleton.getIsChasingTheHero() && Gdx.input.isKeyPressed(Input.Keys.ANY_KEY)) {
+                sceleton.setPath(pathFinder.findPath(sceleton.getPathCoordinates().x, sceleton.getPathCoordinates().y, hero.getPathCoordinates().x, hero.getPathCoordinates().y));
             }
 
-            /*else if (enemy.getIsReturningToTheStartPoint() && enemy.isWithinDistance(150, hero)
-                    && Gdx.input.isKeyPressed(Input.Keys.ANY_KEY) && enemy.getStartPoint().dst(new Vector2(enemy.getCenterX(), enemy.getCenterY())) < 600) {
-                enemy.chaseTheHero(pathFinder.findPath(enemy.getCenterX(), enemy.getCenterY(), hero.getCenterX(), hero.getCenterY()));
-            }*/
+            for(Sceleton other: sceletons) {
+                if(other != sceleton) {
+                    sceleton.preventOverlap(other);
+                }
+            }
+
+
         }
     }
 
