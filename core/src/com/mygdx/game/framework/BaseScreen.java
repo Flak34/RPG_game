@@ -53,6 +53,8 @@ public abstract class BaseScreen implements Screen, InputProcessor
             uiStage.act(dt);
             mainStage.act(dt);
 
+
+
             // defined by user
             update(dt);
         }

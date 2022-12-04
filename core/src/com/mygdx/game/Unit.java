@@ -26,11 +26,17 @@ public abstract class Unit extends BaseActor {
     protected float HP;
     protected float MaxHP;
 
+    private HealthBar healthBar;
+
     public Unit(float x, float y, Stage s) {
         super(x, y, s);
 
         MaxHP = 100;
         HP = MaxHP;
+
+        healthBar = new HealthBar();
+        addActor(healthBar);
+        healthBar.setPosition(healthBar.getWidth() / 2 - 2, 80);
     }
 
 

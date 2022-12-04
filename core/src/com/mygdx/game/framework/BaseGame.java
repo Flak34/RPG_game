@@ -28,7 +28,6 @@ public abstract class BaseGame extends Game
      *  Stores reference to game; used when calling setActiveScreen method.
      */
     private static BaseGame game;
-
     public static LabelStyle labelStyle;
     public static TextButton.TextButtonStyle textButtonStyle;
 
