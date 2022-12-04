@@ -9,7 +9,7 @@ import com.mygdx.game.gameai.gamepf.GameGraphPath;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Enemy extends BaseActor {
+public class Enemy extends Unit {
 
     private List<Vector2> path;
     public int num;
@@ -22,7 +22,8 @@ public class Enemy extends BaseActor {
     public Enemy(float x, float y, Stage s) {
 
         super(x,y,s);
-        loadTexture("assets/enemy.png");
+        load_walk_animation("sceleton_walking", 8);
+        load_attack_animation("sceleton_attacking", 10);
 
         startPoint = new Vector2(x + getWidth() / 2, y + getHeight() / 2);
         nodeIndex = 1;
@@ -30,17 +31,23 @@ public class Enemy extends BaseActor {
         isChasingTheHero = false;
         path = null;
 
+        setAnimation(walking_south);
+        facingAngle = 270;
         setBoundaryPolygon(8);
         setAcceleration(400);
         setMaxSpeed(65);
         setDeceleration(400);
+
+        scaleBy(0.8f);
     }
 
     @Override
     public void act(float dt) {
 
         super.act(dt);
+
         if(path != null) {
+            System.out.println("l;kl;jlkjklj");
             float angle = new Vector2(path.get(nodeIndex).x - getCenterX(), path.get(nodeIndex).y - getCenterY()).angleDeg();
             accelerateAtAngle(angle);
             applyPhysics(dt);
@@ -55,7 +62,6 @@ public class Enemy extends BaseActor {
             }
 
         }
-
     }
 
     public void setPath(List<Vector2> newPath) {
@@ -81,13 +87,6 @@ public class Enemy extends BaseActor {
         }
     }
 
-    public float getCenterX() {
-        return getX() + getWidth() / 2;
-    }
-
-    public float getCenterY() {
-        return getY() + getHeight() / 2;
-    }
 
     public Vector2 getStartPoint() {
         return startPoint;

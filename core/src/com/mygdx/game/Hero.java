@@ -15,13 +15,12 @@ public class Hero extends Unit {
     public Hero(float x, float y, Stage s)
     {
         super(x,y,s);
-        isAttacking = false;
 
         //загрузка анимации шага
-        load_walk_animation("hero_walking");
+        load_walk_animation("hero_walking", 8);
 
         //загрузка анимации атаки
-        load_attack_animation("hero_attacking");
+        load_attack_animation("hero_attacking", 12);
 
 
         setAnimation(walking_south);
@@ -38,58 +37,6 @@ public class Hero extends Unit {
     public void act(float dt)
     {
         super.act(dt);
-
-        if ( getSpeed() == 0 && !isAttacking) {
-            setAnimationPaused(true);
-        }
-        else
-        {
-            setAnimationPaused(false);
-
-            if(isAttacking) {
-                setSpeed(0);
-            }
-
-            if (facingAngle == 90)
-            {
-                if(isAttacking) {
-                    setAnimation(attack_north);
-                }
-                else {
-                    setAnimation(walking_north);
-                }
-            }
-            else if (facingAngle == 180)
-            {
-                if(isAttacking) {
-                    setAnimation(attack_west);
-                }
-                else
-                    setAnimation(walking_west);
-            }
-            else if (facingAngle == 270)
-            {
-                if(isAttacking) {
-                    setAnimation(attack_south);
-                }
-                else
-                    setAnimation(walking_south);
-            }
-            else
-            {
-                if(isAttacking) {
-                    setAnimation(attack_east);
-                }
-                else
-                    setAnimation(walking_east);
-            }
-
-            if(isAttacking && isAnimationFinished()) {
-                isAttacking = false;
-            }
-
-        }
-
         alignCamera();
         boundToWorld();
         applyPhysics(dt);

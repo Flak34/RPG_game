@@ -51,6 +51,8 @@ public class LevelScreen extends BaseScreen {
             count++;
             enemies.add(new Enemy((float) enemyStartProps.get("x"), (float)enemyStartProps.get("y"), mainStage));
         }
+
+
     }
 
     @Override
@@ -58,19 +60,15 @@ public class LevelScreen extends BaseScreen {
 
         if (Gdx.input.isKeyPressed(Input.Keys.A)) {
             hero.accelerateAtAngle(180);
-            hero.setFacingAngle(180);
         }
         if (Gdx.input.isKeyPressed(Input.Keys.D)) {
             hero.accelerateAtAngle(0);
-            hero.setFacingAngle(0);
         }
         if (Gdx.input.isKeyPressed(Input.Keys.W)) {
             hero.accelerateAtAngle(90);
-            hero.setFacingAngle(90);
         }
         if (Gdx.input.isKeyPressed(Input.Keys.S)) {
             hero.accelerateAtAngle(270);
-            hero.setFacingAngle(270);
         }
 
         for (BaseActor wall : BaseActor.getList(mainStage, Wall.class))
@@ -87,8 +85,11 @@ public class LevelScreen extends BaseScreen {
                 //enemy.printPath();
                 BaseActor actor;
             }*/
-            if (enemy.isWithinDistance(400, hero) && enemy.getStartPoint().dst(new Vector2(enemy.getCenterX(), enemy.getCenterY())) < 5) {
+
+
+            if (enemy.getPathCoordinates().dst(hero.getPathCoordinates()) < 400 && enemy.getStartPoint().dst(enemy.getPathCoordinates()) < 100) {
                 enemy.chaseTheHero(pathFinder.findPath(enemy.getCenterX(), enemy.getCenterY(), hero.getCenterX(), hero.getCenterY()));
+                System.out.println(";ldmfl;emrl;ferf");
             }
             else if (enemy.getIsChasingTheHero() && Gdx.input.isKeyPressed(Input.Keys.ANY_KEY)) {
                 enemy.setPath(pathFinder.findPath(enemy.getCenterX(), enemy.getCenterY(), hero.getCenterX(), hero.getCenterY()));

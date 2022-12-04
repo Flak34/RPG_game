@@ -12,4 +12,6 @@ public class CrazyBerserkers extends BaseGame {
         super.create();
         setActiveScreen( new LevelScreen() );
     }
+
+
 }
