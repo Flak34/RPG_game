@@ -11,19 +11,20 @@ import com.mygdx.game.framework.BaseScreen;
 import com.mygdx.game.framework.TilemapActor;
 import com.mygdx.game.gameai.gamepf.GamePathFinder;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class LevelScreen extends BaseScreen {
 
     Hero hero;
-    Enemy enemy;
 
     GamePathFinder pathFinder;
 
-
+    private ArrayList<Enemy> enemies;
 
     @Override
     public void initialize() {
+        int count = 0;
 
 
         TilemapActor tma = new TilemapActor("test_map.tmx", mainStage);
@@ -38,13 +39,18 @@ public class LevelScreen extends BaseScreen {
                     mainStage);
         }
 
-
+        //добавление главного героя на карту
         MapObject startPoint = tma.getRectangleList("start").get(0);
         MapProperties startProps = startPoint.getProperties();
         hero = new Hero( (float)startProps.get("x"), (float)startProps.get("y"), mainStage);
-        enemy = new Enemy(900, 900, mainStage);
 
-
+        //добавление врагов на карту
+        enemies = new ArrayList<>();
+        for(MapObject enemyStartPoint: tma.getRectangleList("enemyStart")) {
+            MapProperties enemyStartProps = enemyStartPoint.getProperties();
+            count++;
+            enemies.add(new Enemy((float) enemyStartProps.get("x"), (float)enemyStartProps.get("y"), mainStage));
+        }
     }
 
     @Override
@@ -57,7 +63,6 @@ public class LevelScreen extends BaseScreen {
         if (Gdx.input.isKeyPressed(Input.Keys.D)) {
             hero.accelerateAtAngle(0);
             hero.setFacingAngle(0);
-
         }
         if (Gdx.input.isKeyPressed(Input.Keys.W)) {
             hero.accelerateAtAngle(90);
@@ -68,29 +73,32 @@ public class LevelScreen extends BaseScreen {
             hero.setFacingAngle(270);
         }
 
-
         for (BaseActor wall : BaseActor.getList(mainStage, Wall.class))
         {
             hero.preventOverlap(wall);
         }
 
-
-        //обработка перемещений врагов
-        if(enemy.getStartPoint().dst(new Vector2(enemy.getCenterX(), enemy.getCenterY())) > 800) {
-            enemy.returnToTheStartPoint(pathFinder.findPath(enemy.getCenterX(), enemy.getCenterY(), enemy.getStartPoint().x, enemy.getStartPoint().y));
-        }
-        else if(enemy.getIsReturningToTheStartPoint() && enemy.isWithinDistance(150, hero)
-        && Gdx.input.isKeyPressed(Input.Keys.ANY_KEY) && enemy.getStartPoint().dst(new Vector2(enemy.getCenterX(), enemy.getCenterY())) < 600) {
-            enemy.chaseTheHero(pathFinder.findPath(enemy.getCenterX(), enemy.getCenterY(), hero.getCenterX(), hero.getCenterY()));
-        }
-        else if(enemy.isWithinDistance(400, hero) && enemy.getStartPoint().dst(new Vector2(enemy.getCenterX(), enemy.getCenterY())) < 5) {
-            enemy.chaseTheHero(pathFinder.findPath(enemy.getCenterX(), enemy.getCenterY(), hero.getCenterX(), hero.getCenterY()));
-        }
-        else if(enemy.getIsChasingTheHero() && Gdx.input.isKeyPressed(Input.Keys.ANY_KEY)) {
-            enemy.setPath(pathFinder.findPath(enemy.getCenterX(), enemy.getCenterY(), hero.getCenterX(), hero.getCenterY()));
-        }
+        for(Enemy enemy: enemies) {
+            //обработка перемещений врагов
 
 
+            /*if (enemy.getStartPoint().dst(new Vector2(enemy.getCenterX(), enemy.getCenterY())) > 500) {
+                enemy.returnToTheStartPoint(pathFinder.findPath(enemy.getCenterX(), enemy.getCenterY(), enemy.getStartPoint().x, enemy.getStartPoint().y));
+                //enemy.printPath();
+                BaseActor actor;
+            }*/
+            if (enemy.isWithinDistance(400, hero) && enemy.getStartPoint().dst(new Vector2(enemy.getCenterX(), enemy.getCenterY())) < 5) {
+                enemy.chaseTheHero(pathFinder.findPath(enemy.getCenterX(), enemy.getCenterY(), hero.getCenterX(), hero.getCenterY()));
+            }
+            else if (enemy.getIsChasingTheHero() && Gdx.input.isKeyPressed(Input.Keys.ANY_KEY)) {
+                enemy.setPath(pathFinder.findPath(enemy.getCenterX(), enemy.getCenterY(), hero.getCenterX(), hero.getCenterY()));
+            }
+
+            /*else if (enemy.getIsReturningToTheStartPoint() && enemy.isWithinDistance(150, hero)
+                    && Gdx.input.isKeyPressed(Input.Keys.ANY_KEY) && enemy.getStartPoint().dst(new Vector2(enemy.getCenterX(), enemy.getCenterY())) < 600) {
+                enemy.chaseTheHero(pathFinder.findPath(enemy.getCenterX(), enemy.getCenterY(), hero.getCenterX(), hero.getCenterY()));
+            }*/
+        }
     }
 
     @Override

@@ -6,22 +6,22 @@ import com.mygdx.game.framework.BaseActor;
 import com.mygdx.game.gameai.gamepf.GameGraph;
 import com.mygdx.game.gameai.gamepf.GameGraphPath;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Enemy extends BaseActor {
 
     private List<Vector2> path;
+    public int num;
     private int nodeIndex;
     private Vector2 startPoint;
     private boolean isReturningToTheStartPoint;
     private boolean isChasingTheHero;
 
+
     public Enemy(float x, float y, Stage s) {
 
         super(x,y,s);
-
-
-
         loadTexture("assets/enemy.png");
 
         startPoint = new Vector2(x + getWidth() / 2, y + getHeight() / 2);
@@ -34,27 +34,26 @@ public class Enemy extends BaseActor {
         setAcceleration(400);
         setMaxSpeed(65);
         setDeceleration(400);
-
-
     }
 
     @Override
     public void act(float dt) {
 
+        super.act(dt);
         if(path != null) {
-            super.act(dt);
             float angle = new Vector2(path.get(nodeIndex).x - getCenterX(), path.get(nodeIndex).y - getCenterY()).angleDeg();
             accelerateAtAngle(angle);
             applyPhysics(dt);
             boundToWorld();
             float currentDst = new Vector2(getCenterX(), getCenterY()).dst(path.get(nodeIndex));
 
-            if (currentDst < 5 && nodeIndex < path.size() - 1) {
+            if (currentDst < Math.abs(getSpeed() * dt - currentDst) && nodeIndex < path.size() - 1) {
                 nodeIndex++;
             }
-            else if(currentDst < 5 && nodeIndex == path.size() - 1) {
+            else if(currentDst < Math.abs(getSpeed() * dt - currentDst) && nodeIndex == path.size() - 1) {
                 path = null;
             }
+
         }
 
     }
@@ -76,7 +75,7 @@ public class Enemy extends BaseActor {
             */
 
             for(int i = 0; i < path.size(); i++) {
-                System.out.print("(" + path.get(i).x + "; " + path.get(i).y + "); ");
+                System.out.print("(" + path.get(i).x + "; " + path.get(i).y + "); " + " num: " + num);
             }
             System.out.println();
         }
@@ -97,14 +96,16 @@ public class Enemy extends BaseActor {
     public void returnToTheStartPoint(List<Vector2> path) {
         isChasingTheHero = false;
         isReturningToTheStartPoint = true;
-        this.path = path;
+        if(path != null)
+            this.path = path;
         nodeIndex = 1;
     }
 
     public void chaseTheHero(List<Vector2> path) {
             isChasingTheHero = true;
             isReturningToTheStartPoint = false;
-            this.path = path;
+            if(path != null)
+                this.path = path;
             nodeIndex = 1;
     }
 
