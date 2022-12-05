@@ -11,15 +11,23 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.Array;
 import com.mygdx.game.framework.BaseActor;
 
-public abstract class Unit extends BaseActor {
+public abstract class BattleUnit extends BaseActor {
     Animation walking_north;
+    Animation walking_north_west;
+    Animation walking_north_east;
     Animation walking_south;
+    Animation walking_south_west;
+    Animation walking_south_east;
     Animation walking_east;
     Animation walking_west;
     Animation attack_east;
     Animation attack_west;
     Animation attack_north;
+    Animation attack_north_east;
+    Animation attack_north_west;
     Animation attack_south;
+    Animation attack_south_east;
+    Animation attack_south_west;
     private boolean isAttacking;
 
     protected float HP;
@@ -30,7 +38,7 @@ public abstract class Unit extends BaseActor {
 
     private float damage;
 
-    public Unit(float x, float y, Stage s) {
+    public BattleUnit(float x, float y, Stage s) {
         super(x, y, s);
 
         MaxHP = 100;
@@ -61,14 +69,38 @@ public abstract class Unit extends BaseActor {
                 setSpeed(0);
             }
 
-            if (getFacingAngle() == 90)
+            if (getFacingAngle() == 0)
+            {
+                if(isAttacking) {
+                    setAnimation(attack_east);
+                }
+                else {
+                    setAnimation(walking_east);
+                }
+            }
+            else if (getFacingAngle() == 45)
+            {
+                if(isAttacking) {
+                    setAnimation(attack_north_east);
+                }
+                else
+                    setAnimation(walking_north_east);
+            }
+            else if (getFacingAngle() == 90)
             {
                 if(isAttacking) {
                     setAnimation(attack_north);
                 }
-                else {
+                else
                     setAnimation(walking_north);
+            }
+            else if (getFacingAngle() == 135)
+            {
+                if(isAttacking) {
+                    setAnimation(attack_north_west);
                 }
+                else
+                    setAnimation(walking_north_west);
             }
             else if (getFacingAngle() == 180)
             {
@@ -78,6 +110,14 @@ public abstract class Unit extends BaseActor {
                 else
                     setAnimation(walking_west);
             }
+            else if (getFacingAngle() == 225)
+            {
+                if(isAttacking) {
+                    setAnimation(attack_south_west);
+                }
+                else
+                    setAnimation(walking_south_west);
+            }
             else if (getFacingAngle() == 270)
             {
                 if(isAttacking) {
@@ -86,14 +126,15 @@ public abstract class Unit extends BaseActor {
                 else
                     setAnimation(walking_south);
             }
-            else
+            else if (getFacingAngle() == 315)
             {
                 if(isAttacking) {
-                    setAnimation(attack_east);
+                    setAnimation(attack_south_east);
                 }
                 else
-                    setAnimation(walking_east);
+                    setAnimation(walking_south_east);
             }
+
 
             if(isAttacking && isAnimationFinished()) {
                 isAttacking = false;
@@ -108,6 +149,42 @@ public abstract class Unit extends BaseActor {
 
     protected void load_walk_animation(String mainPath, int numOfFiles, float frameDuration) {
         Array<TextureRegion> textureArray = new Array<TextureRegion>(true, numOfFiles, TextureRegion.class);
+        //для северо-запада
+        for(int i = 0; i < numOfFiles; i++) {
+            TextureRegion textureRegion = new TextureRegion();
+            Texture texture = new Texture(Gdx.files.internal("assets/" + mainPath + "/walking_nw" + i + ".png"));
+            textureRegion.setRegion(texture);
+            textureArray.add(textureRegion);
+        }
+        walking_north_west = new Animation(frameDuration, textureArray, Animation.PlayMode.LOOP);
+        textureArray.clear();
+        //для северо-востока
+        for(int i = 0; i < numOfFiles; i++) {
+            TextureRegion textureRegion = new TextureRegion();
+            Texture texture = new Texture(Gdx.files.internal("assets/" + mainPath + "/walking_ne" + i + ".png"));
+            textureRegion.setRegion(texture);
+            textureArray.add(textureRegion);
+        }
+        walking_north_east = new Animation(frameDuration, textureArray, Animation.PlayMode.LOOP);
+        textureArray.clear();
+        //для юго-запада
+        for(int i = 0; i < numOfFiles; i++) {
+            TextureRegion textureRegion = new TextureRegion();
+            Texture texture = new Texture(Gdx.files.internal("assets/" + mainPath + "/walking_sw" + i + ".png"));
+            textureRegion.setRegion(texture);
+            textureArray.add(textureRegion);
+        }
+        walking_south_west = new Animation(frameDuration, textureArray, Animation.PlayMode.LOOP);
+        textureArray.clear();
+        //для юго-востока
+        for(int i = 0; i < numOfFiles; i++) {
+            TextureRegion textureRegion = new TextureRegion();
+            Texture texture = new Texture(Gdx.files.internal("assets/" + mainPath + "/walking_se" + i + ".png"));
+            textureRegion.setRegion(texture);
+            textureArray.add(textureRegion);
+        }
+        walking_south_east = new Animation(frameDuration, textureArray, Animation.PlayMode.LOOP);
+        textureArray.clear();
         //для востока
         for(int i = 0; i < numOfFiles; i++) {
             TextureRegion textureRegion = new TextureRegion();
@@ -149,6 +226,42 @@ public abstract class Unit extends BaseActor {
     protected void load_attack_animation(String mainPath, int numOfFiles, float frameDuration) {
 
         Array<TextureRegion> textureArray = new Array<TextureRegion>(true, numOfFiles, TextureRegion.class);
+        //для северо-востока
+        for(int i = 0; i < numOfFiles; i++) {
+            TextureRegion textureRegion = new TextureRegion();
+            Texture texture = new Texture(Gdx.files.internal("assets/" + mainPath + "/attack_ne" + i + ".png"));
+            textureRegion.setRegion(texture);
+            textureArray.add(textureRegion);
+        }
+        attack_north_east = new Animation(frameDuration, textureArray, Animation.PlayMode.NORMAL);
+        textureArray.clear();
+        //для северо-запада
+        for(int i = 0; i < numOfFiles; i++) {
+            TextureRegion textureRegion = new TextureRegion();
+            Texture texture = new Texture(Gdx.files.internal("assets/" + mainPath + "/attack_nw" + i + ".png"));
+            textureRegion.setRegion(texture);
+            textureArray.add(textureRegion);
+        }
+        attack_north_west = new Animation(frameDuration, textureArray, Animation.PlayMode.NORMAL);
+        textureArray.clear();
+        //для юго-востока
+        for(int i = 0; i < numOfFiles; i++) {
+            TextureRegion textureRegion = new TextureRegion();
+            Texture texture = new Texture(Gdx.files.internal("assets/" + mainPath + "/attack_se" + i + ".png"));
+            textureRegion.setRegion(texture);
+            textureArray.add(textureRegion);
+        }
+        attack_south_east = new Animation(frameDuration, textureArray, Animation.PlayMode.NORMAL);
+        textureArray.clear();
+        //для юго-запада
+        for(int i = 0; i < numOfFiles; i++) {
+            TextureRegion textureRegion = new TextureRegion();
+            Texture texture = new Texture(Gdx.files.internal("assets/" + mainPath + "/attack_sw" + i + ".png"));
+            textureRegion.setRegion(texture);
+            textureArray.add(textureRegion);
+        }
+        attack_south_west = new Animation(frameDuration, textureArray, Animation.PlayMode.NORMAL);
+        textureArray.clear();
         //востока
         for(int i = 0; i < numOfFiles; i++) {
             TextureRegion textureRegion = new TextureRegion();

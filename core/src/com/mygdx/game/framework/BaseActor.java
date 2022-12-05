@@ -627,14 +627,29 @@ public class BaseActor extends Group
 
         if(getSpeed() > 0) {
             float angle = getMotionAngle();
-            if(angle <= 45 || angle >= 315) {
+            if(angle <= 22.5 || angle >= 337.5) {
                 facingAngle = 0;
             }
-            else if(angle > 45 && angle <= 135) {
+            else if(angle > 22.5 && angle <= 67.5) {
+                facingAngle = 45;
+            }
+            else if(angle > 67.5 && angle <= 112.5) {
                 facingAngle = 90;
             }
-            else if(angle > 135 && angle <= 225) {
+            else if(angle > 112.5 && angle <= 157.5) {
+                facingAngle = 135;
+            }
+            else if(angle > 157.5 && angle <= 202.5) {
                 facingAngle = 180;
+            }
+            else if(angle > 202.5 && angle <= 247.5) {
+                facingAngle = 225;
+            }
+            else if(angle > 247.5 && angle <= 292.5) {
+                facingAngle = 270;
+            }
+            else if(angle > 292.5 && angle <= 337.5) {
+                facingAngle = 315;
             }
             else {
                 facingAngle = 270;

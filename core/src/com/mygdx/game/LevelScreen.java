@@ -77,6 +77,8 @@ public class LevelScreen extends BaseScreen {
             hero.accelerateAtAngle(270);
         }
 
+        System.out.println(hero.getFacingAngle());
+
         //обработка столкновений героя и врагов друг с другом и со стенами
         for (BaseActor wall : BaseActor.getList(mainStage, Wall.class))
         {

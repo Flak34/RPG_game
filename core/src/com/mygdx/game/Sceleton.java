@@ -5,7 +5,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 
 import java.util.List;
 
-public class Sceleton extends Unit {
+public class Sceleton extends BattleUnit {
 
     private List<Vector2> path;
     public int num;
