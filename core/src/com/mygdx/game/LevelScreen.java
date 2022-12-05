@@ -77,7 +77,6 @@ public class LevelScreen extends BaseScreen {
             hero.accelerateAtAngle(270);
         }
 
-        System.out.println(hero.getFacingAngle());
 
         //обработка столкновений героя и врагов друг с другом и со стенами
         for (BaseActor wall : BaseActor.getList(mainStage, Wall.class))
@@ -93,7 +92,6 @@ public class LevelScreen extends BaseScreen {
                     sceleton.setZIndex(6);
             }
         }
-
 
 
         //обработка поведения врагов
@@ -124,6 +122,17 @@ public class LevelScreen extends BaseScreen {
             !sceleton.getIsAttacking()) {
                 sceleton.attack();
                 hero.takeDamage(sceleton.getDamage() * dt);
+            }
+
+            //обработка смерти героя
+            if(hero.HP <= 0 && hero.isAnimationFinished()) {
+                hero.remove();
+            }
+
+            //удаление убитых скелетов
+            if(sceleton.HP <= 0 && sceleton.isAnimationFinished()) {
+                sceleton.remove();
+                sceletons.remove(sceleton);
             }
 
         }

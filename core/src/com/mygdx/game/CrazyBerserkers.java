@@ -13,5 +13,4 @@ public class CrazyBerserkers extends BaseGame {
         setActiveScreen( new LevelScreen() );
     }
 
-
 }

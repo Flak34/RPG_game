@@ -12,30 +12,28 @@ import com.badlogic.gdx.utils.Array;
 import com.mygdx.game.framework.BaseActor;
 
 public abstract class BattleUnit extends BaseActor {
-    Animation walking_north;
-    Animation walking_north_west;
-    Animation walking_north_east;
-    Animation walking_south;
-    Animation walking_south_west;
-    Animation walking_south_east;
-    Animation walking_east;
-    Animation walking_west;
-    Animation attack_east;
-    Animation attack_west;
-    Animation attack_north;
-    Animation attack_north_east;
-    Animation attack_north_west;
-    Animation attack_south;
-    Animation attack_south_east;
-    Animation attack_south_west;
+    protected Animation walking_north;
+    protected Animation walking_north_west;
+    protected Animation walking_north_east;
+    protected Animation walking_south;
+    protected Animation walking_south_west;
+    protected Animation walking_south_east;
+    protected Animation walking_east;
+    protected Animation walking_west;
+    protected Animation attack_east;
+    protected Animation attack_west;
+    protected Animation attack_north;
+    protected Animation attack_north_east;
+    protected Animation attack_north_west;
+    protected Animation attack_south;
+    protected Animation attack_south_east;
+    protected Animation attack_south_west;
+    protected Animation death_animation;
     private boolean isAttacking;
-
     protected float HP;
     protected float MaxHP;
-
     private HealthBar healthBar;
     private float healthBarLength;
-
     private float damage;
 
     public BattleUnit(float x, float y, Stage s) {
@@ -53,10 +51,14 @@ public abstract class BattleUnit extends BaseActor {
         damage = 30;
     }
 
-
     @Override
     public void act(float dt) {
         super.act(dt);
+
+        if(HP <= 0) {
+            setAnimation(death_animation);
+            return;
+        }
 
         if ( getSpeed() == 0 && !isAttacking) {
             setAnimationPaused(true);
@@ -299,13 +301,23 @@ public abstract class BattleUnit extends BaseActor {
         attack_south = new Animation(frameDuration, textureArray, Animation.PlayMode.NORMAL);
         textureArray.clear();
     }
+    protected void load_death_animation(String mainPath, int numOfFiles, float frameDuration) {
+        Array<TextureRegion> textureArray = new Array<TextureRegion>(true, numOfFiles, TextureRegion.class);
+        for(int i = 0; i < numOfFiles; i++) {
+            TextureRegion textureRegion = new TextureRegion();
+            Texture texture = new Texture(Gdx.files.internal("assets/" + mainPath + "/dying" + i + ".png"));
+            textureRegion.setRegion(texture);
+            textureArray.add(textureRegion);
+        }
+        death_animation = new Animation(frameDuration, textureArray, Animation.PlayMode.NORMAL);
+        textureArray.clear();
+    }
 
     public void attack() {
         setSpeed(0);
         setAnimationPaused(true);
         isAttacking = true;
     }
-
 
     public Vector2 getPathCoordinates() {
         return new Vector2(getX() + getWidth() / 2, getY() + getHeight() / 4);

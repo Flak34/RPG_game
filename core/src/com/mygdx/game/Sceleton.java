@@ -20,6 +20,7 @@ public class Sceleton extends BattleUnit {
         super(x,y,s);
         load_walk_animation("sceleton_walking", 8, 0.08f);
         load_attack_animation("sceleton_attacking", 10, 0.05f);
+        load_death_animation("sceleton_dying", 9, 0.08f);
 
         startPoint = new Vector2(x + getWidth() / 2, y + getHeight() / 2);
         nodeIndex = 1;
@@ -34,6 +35,8 @@ public class Sceleton extends BattleUnit {
         setMaxSpeed(65);
         setDeceleration(400);
 
+        HP = 30;
+
         scaleBy(0.8f);
     }
 
@@ -41,6 +44,10 @@ public class Sceleton extends BattleUnit {
     public void act(float dt) {
 
         super.act(dt);
+
+        if(HP <= 0)
+            return;
+
 
         if(path != null) {
             float pathAngle = new Vector2(path.get(nodeIndex).x - getPathCoordinates().x, path.get(nodeIndex).y - getPathCoordinates().y).angleDeg();
