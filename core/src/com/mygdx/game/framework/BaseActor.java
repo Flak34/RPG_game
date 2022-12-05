@@ -38,6 +38,7 @@ public class BaseActor extends Group
     private float maxSpeed;
     private float deceleration;
     private Polygon boundaryPolygon;
+    float facingAngle;
 
     // хранит размер игрового мира для всех объектов
     private static Rectangle worldBounds;
@@ -623,6 +624,22 @@ public class BaseActor extends Group
 
         if (!animationPaused)
             elapsedTime += dt;
+
+        if(getSpeed() > 0) {
+            float angle = getMotionAngle();
+            if(angle <= 45 || angle >= 315) {
+                facingAngle = 0;
+            }
+            else if(angle > 45 && angle <= 135) {
+                facingAngle = 90;
+            }
+            else if(angle > 135 && angle <= 225) {
+                facingAngle = 180;
+            }
+            else {
+                facingAngle = 270;
+            }
+        }
     }
 
     /**
@@ -657,6 +674,14 @@ public class BaseActor extends Group
 
 
         super.draw( batch, parentAlpha );
+    }
+
+    public float getFacingAngle() {
+        return facingAngle;
+    }
+
+    public void setFacingAngle(float angle) {
+        facingAngle = angle;
     }
 
 }

@@ -20,43 +20,35 @@ public abstract class Unit extends BaseActor {
     Animation attack_west;
     Animation attack_north;
     Animation attack_south;
-    float facingAngle;
-    boolean isAttacking;
+    private boolean isAttacking;
 
     protected float HP;
     protected float MaxHP;
 
     private HealthBar healthBar;
+    private float healthBarLength;
+
+    private float damage;
 
     public Unit(float x, float y, Stage s) {
         super(x, y, s);
 
         MaxHP = 100;
         HP = MaxHP;
+        healthBarLength = 50;
 
         healthBar = new HealthBar();
         addActor(healthBar);
-        healthBar.setPosition(healthBar.getWidth() / 2 - 2, 80);
+        healthBar.setWidth(HP / MaxHP * healthBarLength);
+        healthBar.setPosition(healthBar.getWidth() / 2, 83);
+
+        damage = 30;
     }
 
 
     @Override
     public void act(float dt) {
         super.act(dt);
-
-        float angle = getMotionAngle();
-        if(angle <= 45 || angle >= 315) {
-            facingAngle = 0;
-        }
-        else if(angle > 45 && angle <= 135) {
-            facingAngle = 90;
-        }
-        else if(angle > 135 && angle <= 225) {
-            facingAngle = 180;
-        }
-        else {
-            facingAngle = 270;
-        }
 
         if ( getSpeed() == 0 && !isAttacking) {
             setAnimationPaused(true);
@@ -69,7 +61,7 @@ public abstract class Unit extends BaseActor {
                 setSpeed(0);
             }
 
-            if (facingAngle == 90)
+            if (getFacingAngle() == 90)
             {
                 if(isAttacking) {
                     setAnimation(attack_north);
@@ -78,7 +70,7 @@ public abstract class Unit extends BaseActor {
                     setAnimation(walking_north);
                 }
             }
-            else if (facingAngle == 180)
+            else if (getFacingAngle() == 180)
             {
                 if(isAttacking) {
                     setAnimation(attack_west);
@@ -86,7 +78,7 @@ public abstract class Unit extends BaseActor {
                 else
                     setAnimation(walking_west);
             }
-            else if (facingAngle == 270)
+            else if (getFacingAngle() == 270)
             {
                 if(isAttacking) {
                     setAnimation(attack_south);
@@ -108,10 +100,13 @@ public abstract class Unit extends BaseActor {
             }
 
         }
+
+
+        healthBar.setWidth(HP / MaxHP * healthBarLength);
+        healthBar.setPosition(getWidth()/ 2 - healthBar.getWidth() / 2, 83);
     }
 
-    protected void load_walk_animation(String mainPath, int numOfFiles) {
-        float frameDuration = 0.08f;
+    protected void load_walk_animation(String mainPath, int numOfFiles, float frameDuration) {
         Array<TextureRegion> textureArray = new Array<TextureRegion>(true, numOfFiles, TextureRegion.class);
         //для востока
         for(int i = 0; i < numOfFiles; i++) {
@@ -151,8 +146,8 @@ public abstract class Unit extends BaseActor {
         textureArray.clear();
     }
 
-    protected void load_attack_animation(String mainPath, int numOfFiles) {
-        float frameDuration = 0.04f;
+    protected void load_attack_animation(String mainPath, int numOfFiles, float frameDuration) {
+
         Array<TextureRegion> textureArray = new Array<TextureRegion>(true, numOfFiles, TextureRegion.class);
         //востока
         for(int i = 0; i < numOfFiles; i++) {
@@ -198,14 +193,6 @@ public abstract class Unit extends BaseActor {
         isAttacking = true;
     }
 
-    public float getFacingAngle()
-    {
-        return facingAngle;
-    }
-
-    public void setFacingAngle(float facingAngle) {
-        this.facingAngle = facingAngle;
-    }
 
     public Vector2 getPathCoordinates() {
         return new Vector2(getX() + getWidth() / 2, getY() + getHeight() / 4);
@@ -228,8 +215,23 @@ public abstract class Unit extends BaseActor {
         setBoundaryPolygon(new Polygon(vertices));
     }
 
-
     public void takeDamage(float amount) {
         HP -= amount;
+    }
+
+    public void setHealthBarLength(float length) {
+        healthBarLength = length;
+    }
+
+    public boolean getIsAttacking() {
+        return isAttacking;
+    }
+
+    public float getDamage() {
+        return damage;
+    }
+
+    public void setDamage(float damage) {
+        this.damage = damage;
     }
 }

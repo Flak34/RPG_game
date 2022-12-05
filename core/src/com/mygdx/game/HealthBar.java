@@ -10,7 +10,6 @@ public class HealthBar extends Actor {
 
     public HealthBar() {
         texture = new Texture(Gdx.files.internal("assets/health_bar.png"));
-        setWidth(50);
         setHeight(4);
     }
 

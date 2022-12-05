@@ -29,7 +29,6 @@ public class LevelScreen extends BaseScreen {
     public void initialize() {
         int count = 0;
 
-
         TilemapActor tma = new TilemapActor("test_map.tmx", mainStage);
         pathFinder = new GamePathFinder(new TmxMapLoader().load("test_map.tmx"));
 
@@ -47,7 +46,9 @@ public class LevelScreen extends BaseScreen {
         for(MapObject enemyStartPoint: tma.getRectangleList("enemyStart")) {
             MapProperties enemyStartProps = enemyStartPoint.getProperties();
             count++;
-            sceletons.add(new Sceleton((float) enemyStartProps.get("x"), (float)enemyStartProps.get("y"), mainStage));
+            Sceleton sceleton = new Sceleton((float) enemyStartProps.get("x"), (float)enemyStartProps.get("y"), mainStage);
+            sceleton.setDamage(300);
+            sceletons.add(sceleton);
         }
 
 
@@ -62,6 +63,7 @@ public class LevelScreen extends BaseScreen {
     @Override
     public void update(float dt) {
 
+        //обработка перемещений героя
         if (Gdx.input.isKeyPressed(Input.Keys.A)) {
             hero.accelerateAtAngle(180);
         }
@@ -75,6 +77,7 @@ public class LevelScreen extends BaseScreen {
             hero.accelerateAtAngle(270);
         }
 
+        //обработка столкновений героя и врагов друг с другом и со стенами
         for (BaseActor wall : BaseActor.getList(mainStage, Wall.class))
         {
             hero.preventOverlap(wall);
@@ -91,6 +94,7 @@ public class LevelScreen extends BaseScreen {
 
 
 
+        //обработка поведения врагов
         for(Sceleton sceleton : sceletons) {
             //обработка перемещений врагов
             if (sceleton.getPathCoordinates().dst(hero.getPathCoordinates()) < 400 && sceleton.getStartPoint().dst(sceleton.getPathCoordinates()) < 100) {
@@ -106,6 +110,19 @@ public class LevelScreen extends BaseScreen {
                 }
             }
 
+            //обработка принятия урона скелетами от героя
+            if(hero.getIsAttacking() && hero.getPathCoordinates().dst(sceleton.getPathCoordinates()) <= 70 &&
+            Math.abs(hero.getFacingAngle() - sceleton.getFacingAngle()) >= 150)
+            {
+                sceleton.takeDamage(hero.getDamage() * dt);
+            }
+
+            //обработка принятия урона героем от скелетов
+            if(sceleton.getIsChasingTheHero() && sceleton.getPathCoordinates().dst(hero.getPathCoordinates()) <= 70 &&
+            !sceleton.getIsAttacking()) {
+                sceleton.attack();
+                hero.takeDamage(sceleton.getDamage() * dt);
+            }
 
         }
     }

@@ -17,23 +17,19 @@ public class Hero extends Unit {
         super(x,y,s);
 
         //загрузка анимации шага
-        load_walk_animation("hero_walking", 8);
+        load_walk_animation("hero_walking", 8, 0.08f);
 
         //загрузка анимации атаки
-        load_attack_animation("hero_attacking", 12);
+        load_attack_animation("hero_attacking", 12, 0.04f);
 
 
         setAnimation(walking_south);
-        facingAngle = 270;
+        setFacingAngle(270);
         setBoundaryPolygon(8);
         setAcceleration(400);
         setMaxSpeed(100);
         setDeceleration(400);
         scaleBy(1f);
-
-        MaxHP = 200;
-        HP = MaxHP;
-
     }
 
     public void act(float dt)

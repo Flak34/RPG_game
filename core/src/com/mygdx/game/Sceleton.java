@@ -18,8 +18,8 @@ public class Sceleton extends Unit {
     public Sceleton(float x, float y, Stage s) {
 
         super(x,y,s);
-        load_walk_animation("sceleton_walking", 8);
-        load_attack_animation("sceleton_attacking", 10);
+        load_walk_animation("sceleton_walking", 8, 0.08f);
+        load_attack_animation("sceleton_attacking", 10, 0.05f);
 
         startPoint = new Vector2(x + getWidth() / 2, y + getHeight() / 2);
         nodeIndex = 1;
@@ -28,7 +28,7 @@ public class Sceleton extends Unit {
         path = null;
 
         setAnimation(walking_south);
-        facingAngle = 270;
+        setFacingAngle(270);
         setBoundaryPolygon(8);
         setAcceleration(400);
         setMaxSpeed(65);
@@ -43,8 +43,8 @@ public class Sceleton extends Unit {
         super.act(dt);
 
         if(path != null) {
-            float angle = new Vector2(path.get(nodeIndex).x - getPathCoordinates().x, path.get(nodeIndex).y - getPathCoordinates().y).angleDeg();
-            accelerateAtAngle(angle);
+            float pathAngle = new Vector2(path.get(nodeIndex).x - getPathCoordinates().x, path.get(nodeIndex).y - getPathCoordinates().y).angleDeg();
+            accelerateAtAngle(pathAngle);
             applyPhysics(dt);
             boundToWorld();
             float currentDst = new Vector2(getPathCoordinates().x, getPathCoordinates().y).dst(path.get(nodeIndex));
@@ -55,9 +55,8 @@ public class Sceleton extends Unit {
             else if(currentDst < Math.abs(getSpeed() * dt - currentDst) && nodeIndex == path.size() - 1) {
                 path = null;
             }
-
-
         }
+
     }
 
     public void setPath(List<Vector2> newPath) {
