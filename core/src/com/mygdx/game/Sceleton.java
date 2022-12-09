@@ -2,6 +2,7 @@ package com.mygdx.game;
 
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.mygdx.game.gameai.gamepf.GameGraph;
 
 import java.util.List;
 
@@ -75,17 +76,11 @@ public class Sceleton extends BattleUnit {
 
     public void printPath() {
         if(path != null) {
-            /*
-            for (int i = 0; i < path.size(); i++) {
-                System.out.print(" -> " + GameGraph.testMap.get(path.get(i)));
-            }
-            System.out.println("(current node: " + GameGraph.testMap.get(path.get(nodeIndex)) + ")");
-            */
 
-            for(int i = 0; i < path.size(); i++) {
-                System.out.print("(" + path.get(i).x + "; " + path.get(i).y + "); " + " num: " + num);
+            for (int i = 0; i < path.size(); i++) {
+                System.out.print(path.get(i));
             }
-            System.out.println();
+
         }
     }
 

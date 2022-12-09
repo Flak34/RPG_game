@@ -7,11 +7,9 @@ import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
-import com.badlogic.gdx.maps.tiled.TiledMap;
-import com.badlogic.gdx.maps.tiled.TiledMapTile;
-import com.badlogic.gdx.maps.tiled.TmxMapLoader;
+import com.badlogic.gdx.maps.tiled.*;
 import com.badlogic.gdx.maps.tiled.objects.TiledMapTileMapObject;
-import com.badlogic.gdx.maps.tiled.renderers.OrthoCachedTiledMapRenderer;
+import com.badlogic.gdx.maps.tiled.renderers.*;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 
@@ -24,7 +22,10 @@ public class TilemapActor extends Actor {
     public static int windowHeight = 800;
     private TiledMap tiledMap;
     private OrthographicCamera tiledCamera;
+
+
     private OrthoCachedTiledMapRenderer tiledMapRenderer;
+
 
     public TilemapActor(String filename, Stage theStage)
     {
@@ -37,7 +38,8 @@ public class TilemapActor extends Actor {
         int mapWidth = tileWidth * numTilesHorizontal;
         int mapHeight = tileHeight * numTilesVertical;
         BaseActor.setWorldBounds(mapWidth, mapHeight);
-        tiledMapRenderer = new OrthoCachedTiledMapRenderer(tiledMap);
+
+        tiledMapRenderer = new OrthoCachedTiledMapRenderer(tiledMap, 1, 8000);
         tiledMapRenderer.setBlending(true);
         tiledCamera = new OrthographicCamera();
         tiledCamera.setToOrtho(false, windowWidth, windowHeight);

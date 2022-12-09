@@ -1,46 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="96" height="32" tilewidth="32" tileheight="32" infinite="0" nextlayerid="6" nextobjectid="228">
+<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="96" height="32" tilewidth="32" tileheight="32" infinite="0" nextlayerid="4" nextobjectid="59">
  <tileset firstgid="1" name="covering" tilewidth="32" tileheight="32" tilecount="5" columns="0">
   <grid orientation="orthogonal" width="1" height="1"/>
   <tile id="0">
-   <image width="32" height="32" source="covering/dirty_grass.png"/>
+   <image width="32" height="32" source="assets/covering/dirty_grass.png"/>
   </tile>
   <tile id="1">
-   <image width="32" height="32" source="covering/ground1.png"/>
+   <image width="32" height="32" source="assets/covering/ground1.png"/>
   </tile>
   <tile id="2">
-   <image width="32" height="32" source="covering/ground2.png"/>
+   <image width="32" height="32" source="assets/covering/ground2.png"/>
   </tile>
   <tile id="3">
-   <image width="32" height="32" source="covering/ground3.png"/>
+   <image width="32" height="32" source="assets/covering/ground3.png"/>
   </tile>
   <tile id="4">
-   <image width="32" height="32" source="covering/ground4.png"/>
+   <image width="32" height="32" source="assets/covering/ground4.png"/>
   </tile>
  </tileset>
  <tileset firstgid="6" name="trees1" tilewidth="128" tileheight="128" tilecount="32" columns="4">
-  <image source="trees/trees1.png" width="512" height="1024"/>
+  <image source="assets/trees/trees1.png" width="512" height="1024"/>
  </tileset>
  <tileset firstgid="38" name="trees2" tilewidth="128" tileheight="128" tilecount="20" columns="4">
-  <image source="trees/trees2.png" width="512" height="640"/>
+  <image source="assets/trees/trees2.png" width="512" height="640"/>
  </tileset>
  <tileset firstgid="58" name="plants1" tilewidth="64" tileheight="64" tilecount="80" columns="8">
-  <image source="plants/plants1.png" width="512" height="640"/>
+  <image source="assets/plants/plants1.png" width="512" height="640"/>
  </tileset>
  <tileset firstgid="138" name="plants2" tilewidth="96" tileheight="96" tilecount="30" columns="5">
-  <image source="plants/plants2.png" width="480" height="576"/>
- </tileset>
- <tileset firstgid="168" name="castle" tilewidth="512" tileheight="512" tilecount="1" columns="1">
-  <image source="buildings/castle.png" width="512" height="512"/>
- </tileset>
- <tileset firstgid="169" name="windmill" tilewidth="224" tileheight="192" tilecount="1" columns="1">
-  <image source="buildings/windmill.png" width="224" height="192"/>
- </tileset>
- <tileset firstgid="170" name="hut1" tilewidth="256" tileheight="240" tilecount="1" columns="1">
-  <image source="buildings/hut1.png" width="256" height="240"/>
- </tileset>
- <tileset firstgid="171" name="big_house" tilewidth="256" tileheight="336" tilecount="1" columns="1">
-  <image source="buildings/big_house.png" width="256" height="336"/>
+  <image source="assets/plants/plants2.png" width="480" height="576"/>
  </tileset>
  <layer id="1" name="Tile Layer 1" width="96" height="32">
   <data encoding="csv">
@@ -85,7 +73,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 55,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,58,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,41,0,0,0,0,0,43,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,18,0,0,59,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,30,0,0,0,0,0,0,0,0,42,0,0,169,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,18,0,0,59,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,30,0,0,0,0,0,0,0,0,42,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,19,0,0,0,0,0,0,0,0,41,0,73,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,41,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,165,0,0,139,0,0,0,0,0,0,0,0,0,0,0,0,0,19,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,43,0,0,67,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -94,7 +82,7 @@
 0,0,0,163,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,19,0,0,0,0,19,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,163,0,0,139,0,0,0,0,0,0,0,0,0,0,0,0,0,19,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,18,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,168,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,18,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,163,0,0,0,0,0,0,0,0,0,0,0,73,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,20,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,41,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,20,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -103,8 +91,8 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,58,0,0,0,0,0,0,0,41,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,41,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,19,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,171,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,43,0,0,65,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,170,0,0,0,0,0,0,0,0,0,41,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,19,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,43,0,0,65,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,41,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,19,0,0,0,0,19,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,41,0,0,19,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,43,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -114,284 +102,248 @@
 55,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,80,0,95,0,95,95,93,0,93,0,0,93,0,0,80,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <objectgroup id="4" name="Object Layer 1">
-  <object id="71" x="224" y="864" width="32" height="32">
+ <objectgroup id="3" name="Object Layer 1">
+  <object id="1" x="608" y="160" width="64" height="64">
+   <properties>
+    <property name="name" value="Solid"/>
+   </properties>
+  </object>
+  <object id="4" x="384" y="416" width="64" height="64">
+   <properties>
+    <property name="name" value="Solid"/>
+   </properties>
+  </object>
+  <object id="5" x="608" y="384" width="64" height="64">
+   <properties>
+    <property name="name" value="Solid"/>
+   </properties>
+  </object>
+  <object id="6" x="672" y="224" width="64" height="64">
+   <properties>
+    <property name="name" value="Solid"/>
+   </properties>
+  </object>
+  <object id="7" x="800" y="288" width="64" height="64">
+   <properties>
+    <property name="name" value="Solid"/>
+   </properties>
+  </object>
+  <object id="8" x="768" y="544" width="64" height="64">
+   <properties>
+    <property name="name" value="Solid"/>
+   </properties>
+  </object>
+  <object id="9" x="672" y="736" width="64" height="64">
+   <properties>
+    <property name="name" value="Solid"/>
+   </properties>
+  </object>
+  <object id="10" x="544" y="832" width="64" height="64">
+   <properties>
+    <property name="name" value="Solid"/>
+   </properties>
+  </object>
+  <object id="11" x="512" y="928" width="64" height="64">
+   <properties>
+    <property name="name" value="Solid"/>
+   </properties>
+  </object>
+  <object id="12" x="448" y="832" width="64" height="64">
+   <properties>
+    <property name="name" value="Solid"/>
+   </properties>
+  </object>
+  <object id="13" x="128" y="704" width="64" height="64">
+   <properties>
+    <property name="name" value="Solid"/>
+   </properties>
+  </object>
+  <object id="14" x="32" y="960" width="64" height="64">
+   <properties>
+    <property name="name" value="Solid"/>
+   </properties>
+  </object>
+  <object id="15" x="128" y="128" width="64" height="64">
+   <properties>
+    <property name="name" value="Solid"/>
+   </properties>
+  </object>
+  <object id="16" x="32" y="64" width="64" height="64">
+   <properties>
+    <property name="name" value="Solid"/>
+   </properties>
+  </object>
+  <object id="17" x="928" y="800" width="64" height="64">
+   <properties>
+    <property name="name" value="Solid"/>
+   </properties>
+  </object>
+  <object id="18" x="1088" y="800" width="64" height="64">
+   <properties>
+    <property name="name" value="Solid"/>
+   </properties>
+  </object>
+  <object id="19" x="1376" y="832" width="64" height="64">
+   <properties>
+    <property name="name" value="Solid"/>
+   </properties>
+  </object>
+  <object id="20" x="1312" y="608" width="64" height="64">
+   <properties>
+    <property name="name" value="Solid"/>
+   </properties>
+  </object>
+  <object id="21" x="1280" y="448" width="64" height="64">
+   <properties>
+    <property name="name" value="Solid"/>
+   </properties>
+  </object>
+  <object id="22" x="1184" y="352" width="64" height="64">
+   <properties>
+    <property name="name" value="Solid"/>
+   </properties>
+  </object>
+  <object id="23" x="1024" y="384" width="64" height="64">
+   <properties>
+    <property name="name" value="Solid"/>
+   </properties>
+  </object>
+  <object id="24" x="960" y="608" width="64" height="64">
+   <properties>
+    <property name="name" value="Solid"/>
+   </properties>
+  </object>
+  <object id="25" x="1216" y="224" width="64" height="64">
+   <properties>
+    <property name="name" value="Solid"/>
+   </properties>
+  </object>
+  <object id="26" x="896" y="160" width="64" height="64">
+   <properties>
+    <property name="name" value="Solid"/>
+   </properties>
+  </object>
+  <object id="27" x="1408" y="96" width="64" height="64">
+   <properties>
+    <property name="name" value="Solid"/>
+   </properties>
+  </object>
+  <object id="28" x="1984" y="128" width="64" height="64">
+   <properties>
+    <property name="name" value="Solid"/>
+   </properties>
+  </object>
+  <object id="29" x="2304" y="512" width="64" height="64">
+   <properties>
+    <property name="name" value="Solid"/>
+   </properties>
+  </object>
+  <object id="30" x="2272" y="128" width="64" height="64">
+   <properties>
+    <property name="name" value="Solid"/>
+   </properties>
+  </object>
+  <object id="31" x="2560" y="288" width="64" height="64">
+   <properties>
+    <property name="name" value="Solid"/>
+   </properties>
+  </object>
+  <object id="32" x="2272" y="928" width="64" height="64">
+   <properties>
+    <property name="name" value="Solid"/>
+   </properties>
+  </object>
+  <object id="33" x="2016" y="928" width="64" height="64">
+   <properties>
+    <property name="name" value="Solid"/>
+   </properties>
+  </object>
+  <object id="34" x="2048" y="736" width="64" height="64">
+   <properties>
+    <property name="name" value="Solid"/>
+   </properties>
+  </object>
+  <object id="35" x="1824" y="896" width="64" height="64">
+   <properties>
+    <property name="name" value="Solid"/>
+   </properties>
+  </object>
+  <object id="36" x="1632" y="896" width="64" height="64">
+   <properties>
+    <property name="name" value="Solid"/>
+   </properties>
+  </object>
+  <object id="37" x="1568" y="672" width="64" height="64">
+   <properties>
+    <property name="name" value="Solid"/>
+   </properties>
+  </object>
+  <object id="38" x="1728" y="480" width="64" height="64">
+   <properties>
+    <property name="name" value="Solid"/>
+   </properties>
+  </object>
+  <object id="39" x="1792" y="192" width="64" height="64">
+   <properties>
+    <property name="name" value="Solid"/>
+   </properties>
+  </object>
+  <object id="40" x="1536" y="288" width="64" height="64">
+   <properties>
+    <property name="name" value="Solid"/>
+   </properties>
+  </object>
+  <object id="41" x="1600" y="96" width="64" height="64">
+   <properties>
+    <property name="name" value="Solid"/>
+   </properties>
+  </object>
+  <object id="42" x="224" y="224" width="32" height="32">
+   <properties>
+    <property name="name" value="Solid"/>
+   </properties>
+  </object>
+  <object id="43" x="160" y="384" width="32" height="32">
+   <properties>
+    <property name="name" value="Solid"/>
+   </properties>
+  </object>
+  <object id="44" x="64" y="448" width="32" height="32">
+   <properties>
+    <property name="name" value="Solid"/>
+   </properties>
+  </object>
+  <object id="45" x="64" y="384" width="32" height="32">
+   <properties>
+    <property name="name" value="Solid"/>
+   </properties>
+  </object>
+  <object id="46" x="128" y="320" width="32" height="32">
+   <properties>
+    <property name="name" value="Solid"/>
+   </properties>
+  </object>
+  <object id="47" x="128" y="224" width="32" height="32">
+   <properties>
+    <property name="name" value="Solid"/>
+   </properties>
+  </object>
+  <object id="54" x="896" y="960" width="512" height="64">
+   <properties>
+    <property name="name" value="Solid"/>
+   </properties>
+  </object>
+  <object id="55" x="1120" y="896" width="64" height="64">
+   <properties>
+    <property name="name" value="Solid"/>
+   </properties>
+  </object>
+  <object id="56" x="224" y="896" width="32" height="32">
    <properties>
     <property name="name" value="heroStart"/>
    </properties>
   </object>
-  <object id="73" x="352" y="704" width="32" height="32">
-   <properties>
-    <property name="name" value="enemyStart"/>
-   </properties>
-  </object>
-  <object id="131" x="384" y="416" width="64" height="64">
-   <properties>
-    <property name="name" value="Solid"/>
-   </properties>
-  </object>
-  <object id="149" x="448" y="832" width="64" height="64">
-   <properties>
-    <property name="name" value="Solid"/>
-   </properties>
-  </object>
-  <object id="150" x="128" y="128" width="64" height="64">
-   <properties>
-    <property name="name" value="Solid"/>
-   </properties>
-  </object>
-  <object id="151" x="32" y="32" width="64" height="64">
-   <properties>
-    <property name="name" value="Solid"/>
-   </properties>
-  </object>
-  <object id="152" x="512" y="928" width="64" height="64">
-   <properties>
-    <property name="name" value="Solid"/>
-   </properties>
-  </object>
-  <object id="153" x="32" y="928" width="64" height="64">
-   <properties>
-    <property name="name" value="Solid"/>
-   </properties>
-  </object>
-  <object id="154" x="544" y="832" width="64" height="64">
-   <properties>
-    <property name="name" value="Solid"/>
-   </properties>
-  </object>
-  <object id="155" x="608" y="384" width="64" height="64">
-   <properties>
-    <property name="name" value="Solid"/>
-   </properties>
-  </object>
-  <object id="156" x="960" y="576" width="64" height="64">
-   <properties>
-    <property name="name" value="Solid"/>
-   </properties>
-  </object>
-  <object id="157" x="768" y="544" width="64" height="64">
-   <properties>
-    <property name="name" value="Solid"/>
-   </properties>
-  </object>
-  <object id="158" x="928" y="800" width="64" height="64">
-   <properties>
-    <property name="name" value="Solid"/>
-   </properties>
-  </object>
-  <object id="159" x="672" y="736" width="64" height="64">
-   <properties>
-    <property name="name" value="Solid"/>
-   </properties>
-  </object>
-  <object id="160" x="128" y="704" width="64" height="64">
-   <properties>
-    <property name="name" value="Solid"/>
-   </properties>
-  </object>
-  <object id="161" x="672" y="224" width="64" height="64">
-   <properties>
-    <property name="name" value="Solid"/>
-   </properties>
-  </object>
-  <object id="162" x="608" y="160" width="64" height="64">
-   <properties>
-    <property name="name" value="Solid"/>
-   </properties>
-  </object>
-  <object id="163" x="800" y="288" width="64" height="64">
-   <properties>
-    <property name="name" value="Solid"/>
-   </properties>
-  </object>
-  <object id="164" x="1024" y="352" width="64" height="64">
-   <properties>
-    <property name="name" value="Solid"/>
-   </properties>
-  </object>
-  <object id="165" x="896" y="160" width="64" height="64">
-   <properties>
-    <property name="name" value="Solid"/>
-   </properties>
-  </object>
-  <object id="166" x="1184" y="352" width="64" height="64">
-   <properties>
-    <property name="name" value="Solid"/>
-   </properties>
-  </object>
-  <object id="167" x="1312" y="608" width="64" height="64">
-   <properties>
-    <property name="name" value="Solid"/>
-   </properties>
-  </object>
-  <object id="168" x="1280" y="448" width="64" height="64">
-   <properties>
-    <property name="name" value="Solid"/>
-   </properties>
-  </object>
-  <object id="169" x="1216" y="224" width="64" height="64">
-   <properties>
-    <property name="name" value="Solid"/>
-   </properties>
-  </object>
-  <object id="170" x="1088" y="800" width="64" height="64">
-   <properties>
-    <property name="name" value="Solid"/>
-   </properties>
-  </object>
-  <object id="171" x="896" y="960" width="512" height="64">
-   <properties>
-    <property name="name" value="Solid"/>
-   </properties>
-  </object>
-  <object id="172" x="1120" y="896" width="64" height="64">
-   <properties>
-    <property name="name" value="Solid"/>
-   </properties>
-  </object>
-  <object id="173" x="1376" y="832" width="64" height="64">
-   <properties>
-    <property name="name" value="Solid"/>
-   </properties>
-  </object>
-  <object id="174" x="1632" y="896" width="64" height="64">
-   <properties>
-    <property name="name" value="Solid"/>
-   </properties>
-  </object>
-  <object id="175" x="1824" y="896" width="64" height="64">
-   <properties>
-    <property name="name" value="Solid"/>
-   </properties>
-  </object>
-  <object id="176" x="1568" y="672" width="64" height="64">
-   <properties>
-    <property name="name" value="Solid"/>
-   </properties>
-  </object>
-  <object id="177" x="1728" y="480" width="64" height="64">
-   <properties>
-    <property name="name" value="Solid"/>
-   </properties>
-  </object>
-  <object id="178" x="1536" y="288" width="64" height="64">
-   <properties>
-    <property name="name" value="Solid"/>
-   </properties>
-  </object>
-  <object id="179" x="1792" y="192" width="64" height="64">
-   <properties>
-    <property name="name" value="Solid"/>
-   </properties>
-  </object>
-  <object id="180" x="1600" y="96" width="64" height="64">
-   <properties>
-    <property name="name" value="Solid"/>
-   </properties>
-  </object>
-  <object id="181" x="1408" y="96" width="64" height="64">
-   <properties>
-    <property name="name" value="Solid"/>
-   </properties>
-  </object>
-  <object id="182" x="2048" y="736" width="64" height="64">
-   <properties>
-    <property name="name" value="Solid"/>
-   </properties>
-  </object>
-  <object id="183" x="2016" y="928" width="64" height="64">
-   <properties>
-    <property name="name" value="Solid"/>
-   </properties>
-  </object>
-  <object id="184" x="2272" y="928" width="64" height="64">
-   <properties>
-    <property name="name" value="Solid"/>
-   </properties>
-  </object>
-  <object id="185" x="2304" y="512" width="64" height="64">
-   <properties>
-    <property name="name" value="Solid"/>
-   </properties>
-  </object>
-  <object id="186" x="2272" y="128" width="64" height="64">
-   <properties>
-    <property name="name" value="Solid"/>
-   </properties>
-  </object>
-  <object id="187" x="1984" y="128" width="64" height="64">
-   <properties>
-    <property name="name" value="Solid"/>
-   </properties>
-  </object>
-  <object id="188" x="1728" y="608" width="192" height="160">
-   <properties>
-    <property name="name" value="Solid"/>
-   </properties>
-  </object>
-  <object id="189" x="2560" y="288" width="64" height="64">
-   <properties>
-    <property name="name" value="Solid"/>
-   </properties>
-  </object>
-  <object id="190" x="2432" y="96" width="96" height="96">
-   <properties>
-    <property name="name" value="Solid"/>
-   </properties>
-  </object>
-  <object id="193" x="2816" y="608" width="224" height="160">
-   <properties>
-    <property name="name" value="Solid"/>
-   </properties>
-  </object>
-  <object id="194" x="2688" y="64" width="288" height="352">
-   <properties>
-    <property name="name" value="Solid"/>
-   </properties>
-  </object>
-  <object id="203" x="384" y="160" width="32" height="32">
-   <properties>
-    <property name="name" value="enemyStart"/>
-   </properties>
-  </object>
-  <object id="211" x="544" y="608" width="32" height="32">
-   <properties>
-    <property name="name" value="enemyStart"/>
-   </properties>
-  </object>
-  <object id="219" x="1088" y="64" width="32" height="32">
-   <properties>
-    <property name="name" value="enemyStart"/>
-   </properties>
-  </object>
-  <object id="220" x="768" y="864" width="64"/>
-  <object id="222" x="1120" y="576" width="32" height="32">
-   <properties>
-    <property name="name" value="enemyStart"/>
-   </properties>
-  </object>
-  <object id="223" x="1440" y="448" width="32" height="32">
-   <properties>
-    <property name="name" value="enemyStart"/>
-   </properties>
-  </object>
-  <object id="224" x="1920" y="448" width="32" height="32">
-   <properties>
-    <property name="name" value="enemyStart"/>
-   </properties>
-  </object>
-  <object id="225" x="2240" y="288" width="32" height="32">
-   <properties>
-    <property name="name" value="enemyStart"/>
-   </properties>
-  </object>
-  <object id="226" x="2496" y="800" width="32" height="32">
-   <properties>
-    <property name="name" value="enemyStart"/>
-   </properties>
-  </object>
-  <object id="227" x="2528" y="480" width="32" height="32">
+  <object id="58" x="1120" y="96" width="32" height="32">
    <properties>
     <property name="name" value="enemyStart"/>
    </properties>

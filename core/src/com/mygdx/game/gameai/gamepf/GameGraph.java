@@ -24,13 +24,9 @@ public class GameGraph implements IndexedGraph<Vector2> {
     private Array<Connection<Vector2>> endConnections; //связи конечной вершины с остатльными вершинами карты
     private Polygon[] polygons;
 
-    public static HashMap<Vector2, Integer> testMap = new HashMap<>();
 
     public GameGraph(Vector2[] nodes, Polygon[] polygons) {
         this.nodes = new Array(nodes);
-        for(int i = 0; i < nodes.length; i++) {
-            testMap.put(nodes[i], i + 1);
-        }
         this.polygons = polygons;
 
         connections = new Array[nodes.length];
@@ -153,13 +149,11 @@ public class GameGraph implements IndexedGraph<Vector2> {
     public void setStartNode(float x, float y) {
         startNode.x = x;
         startNode.y = y;
-        testMap.put(startNode, 9);
     }
 
     public void setEndNode(float x, float y) {
         endNode.x = x;
         endNode.y = y;
-        testMap.put(endNode, 10);
     }
 
     public Vector2 getStartNode() {

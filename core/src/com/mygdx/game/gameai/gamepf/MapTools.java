@@ -28,12 +28,11 @@ public class MapTools {
         for(MapObject obj: objs) {
             Rectangle rectangle = ((RectangleMapObject)obj).getRectangle();
             MapProperties props = obj.getProperties();
-            if ( props.containsKey("name") && props.get("name").equals("Wall")) {
+            if ( props.containsKey("name") && props.get("name").equals("Solid")) {
 
                 rects.add(rectangle);
             }
         }
-
         return rects;
     }
     private static Polygon[] getPolygons(List<Rectangle> rects) {
