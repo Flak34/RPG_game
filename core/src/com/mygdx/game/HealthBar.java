@@ -15,7 +15,6 @@ public class HealthBar extends Actor {
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
-
         batch.draw(texture, getX(), getY(), getWidth(), getHeight());
         super.draw(batch, parentAlpha);
     }

@@ -587,9 +587,6 @@ public class BaseActor extends Group
     public static ArrayList<BaseActor> getList(Stage stage, Class theClass)
     {
         ArrayList<BaseActor> list = new ArrayList<BaseActor>();
-
-
-
         for (Actor a : stage.getActors())
         {
             if ( theClass.isInstance( a ) )
@@ -675,8 +672,6 @@ public class BaseActor extends Group
         batch.setColor(c.r, c.g, c.b, c.a);
 
         if ( animation != null && isVisible() ) {
-
-
             batch.draw(animation.getKeyFrame(elapsedTime),
                     getX(), getY(), getOriginX(), getOriginY(),
                     getWidth(), getHeight(), getScaleX(), getScaleY(), getRotation());
@@ -686,7 +681,6 @@ public class BaseActor extends Group
             if(animation.getKeyFrames().length - 1 < frameNumber)
                 elapsedTime = 0.0f;
         }
-
 
         super.draw( batch, parentAlpha );
     }

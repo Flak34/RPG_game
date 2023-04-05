@@ -2,7 +2,8 @@ package com.mygdx.game;
 
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.mygdx.game.gameai.gamepf.GameGraph;
+import com.mygdx.game.animation_loaders.AbstractAnimationLoader;
+
 
 import java.util.List;
 
@@ -15,12 +16,11 @@ public class Sceleton extends BattleUnit {
     private boolean isReturningToTheStartPoint;
     private boolean isChasingTheHero;
 
+    public Sceleton(float x, float y, Stage s, AbstractAnimationLoader animationLoader) {
 
-    public Sceleton(float x, float y, Stage s) {
-
-        super(x,y,s);
-        load_walk_animation("sceleton_walking", 8, 0.08f);
-        load_attack_animation("sceleton_attacking", 10, 0.05f);
+        super(x,y,s, animationLoader);
+        //load_walk_animation("sceleton_walking", 8, 0.08f);
+        //load_attack_animation("sceleton_attacking", 10, 0.05f);
         load_death_animation("sceleton_dying", 9, 0.08f);
 
         startPoint = new Vector2(x + getWidth() / 2, y + getHeight() / 2);
@@ -29,7 +29,7 @@ public class Sceleton extends BattleUnit {
         isChasingTheHero = false;
         path = null;
 
-        setAnimation(walking_south);
+        setAnimation(animationLoader.getWalkAnimations().get("walking_south"));
         setFacingAngle(270);
         setBoundaryPolygon(8);
         setAcceleration(400);

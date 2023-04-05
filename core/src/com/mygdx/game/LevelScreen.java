@@ -8,6 +8,8 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
+import com.mygdx.game.animation_loaders.HeroAnimationLoader;
+import com.mygdx.game.animation_loaders.SceletonAnimationLoader;
 import com.mygdx.game.framework.BaseActor;
 import com.mygdx.game.framework.BaseScreen;
 import com.mygdx.game.framework.TilemapActor;
@@ -25,15 +27,12 @@ public class LevelScreen extends BaseScreen {
     ArrayList<Wall> walls;
 
 
-
-
     @Override
     public void initialize() {
         int count = 0;
 
-        TilemapActor tma = new TilemapActor("map.tmx", mainStage);
-        pathFinder = new GamePathFinder(new TmxMapLoader().load("map.tmx"));
-
+        TilemapActor tma = new TilemapActor("assets/map.tmx", mainStage);
+        pathFinder = new GamePathFinder(new TmxMapLoader().load("assets/map.tmx"));
 
 
         //добавлям в главную сцену стены
@@ -47,22 +46,23 @@ public class LevelScreen extends BaseScreen {
         }
 
         //добавление врагов на карту
+        SceletonAnimationLoader sceletonAnimationLoader = new SceletonAnimationLoader();
         sceletons = new ArrayList<>();
         for(MapObject enemyStartPoint: tma.getRectangleList("enemyStart")) {
             MapProperties enemyStartProps = enemyStartPoint.getProperties();
             count++;
-            Sceleton sceleton = new Sceleton((float) enemyStartProps.get("x"), (float)enemyStartProps.get("y"), mainStage);
+            Sceleton sceleton = new Sceleton((float) enemyStartProps.get("x"), (float)enemyStartProps.get("y"), mainStage, sceletonAnimationLoader);
             sceleton.setDamage(300);
             sceletons.add(sceleton);
-
         }
 
 
 
         //добавление главного героя на карту
+
         MapObject startPoint = tma.getRectangleList("heroStart").get(0);
         MapProperties startProps = startPoint.getProperties();
-        hero = new Hero( (float)startProps.get("x"), (float)startProps.get("y"), mainStage);
+        hero = new Hero( (float)startProps.get("x"), (float)startProps.get("y"), mainStage, new HeroAnimationLoader());
         hero.setZIndex(5);
 
     }

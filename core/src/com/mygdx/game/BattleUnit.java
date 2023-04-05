@@ -9,25 +9,12 @@ import com.badlogic.gdx.math.Polygon;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.Array;
+import com.mygdx.game.animation_loaders.AbstractAnimationLoader;
 import com.mygdx.game.framework.BaseActor;
 
 public abstract class BattleUnit extends BaseActor {
-    protected Animation walking_north;
-    protected Animation walking_north_west;
-    protected Animation walking_north_east;
-    protected Animation walking_south;
-    protected Animation walking_south_west;
-    protected Animation walking_south_east;
-    protected Animation walking_east;
-    protected Animation walking_west;
-    protected Animation attack_east;
-    protected Animation attack_west;
-    protected Animation attack_north;
-    protected Animation attack_north_east;
-    protected Animation attack_north_west;
-    protected Animation attack_south;
-    protected Animation attack_south_east;
-    protected Animation attack_south_west;
+    protected AbstractAnimationLoader animationLoader;
+    
     protected Animation death_animation;
     private boolean isAttacking;
     protected float HP;
@@ -36,8 +23,10 @@ public abstract class BattleUnit extends BaseActor {
     private float healthBarLength;
     private float damage;
 
-    public BattleUnit(float x, float y, Stage s) {
+    public BattleUnit(float x, float y, Stage s, AbstractAnimationLoader animationLoader) {
         super(x, y, s);
+
+        this.animationLoader = animationLoader;
 
         MaxHP = 100;
         HP = MaxHP;
@@ -47,7 +36,6 @@ public abstract class BattleUnit extends BaseActor {
         addActor(healthBar);
         healthBar.setWidth(HP / MaxHP * healthBarLength);
         healthBar.setPosition(healthBar.getWidth() / 2, 83);
-
         damage = 30;
     }
 
@@ -74,67 +62,68 @@ public abstract class BattleUnit extends BaseActor {
             if (getFacingAngle() == 0)
             {
                 if(isAttacking) {
-                    setAnimation(attack_east);
+
+                    setAnimation(animationLoader.getAttackAnimations().get("attack_east"));
                 }
                 else {
-                    setAnimation(walking_east);
+                    setAnimation(animationLoader.getWalkAnimations().get("walking_east"));
                 }
             }
             else if (getFacingAngle() == 45)
             {
                 if(isAttacking) {
-                    setAnimation(attack_north_east);
+                    setAnimation(animationLoader.getAttackAnimations().get("attack_north_east"));
                 }
                 else
-                    setAnimation(walking_north_east);
+                    setAnimation(animationLoader.getWalkAnimations().get("walking_north_east"));
             }
             else if (getFacingAngle() == 90)
             {
                 if(isAttacking) {
-                    setAnimation(attack_north);
+                    setAnimation(animationLoader.getAttackAnimations().get("attack_north"));
                 }
                 else
-                    setAnimation(walking_north);
+                    setAnimation(animationLoader.getWalkAnimations().get("walking_north"));
             }
             else if (getFacingAngle() == 135)
             {
                 if(isAttacking) {
-                    setAnimation(attack_north_west);
+                    setAnimation(animationLoader.getAttackAnimations().get("attack_north_west"));
                 }
                 else
-                    setAnimation(walking_north_west);
+                    setAnimation(animationLoader.getWalkAnimations().get("walking_north_west"));
             }
             else if (getFacingAngle() == 180)
             {
                 if(isAttacking) {
-                    setAnimation(attack_west);
+                    setAnimation(animationLoader.getAttackAnimations().get("attack_west"));
                 }
                 else
-                    setAnimation(walking_west);
+                    setAnimation(animationLoader.getWalkAnimations().get("walking_west"));
             }
             else if (getFacingAngle() == 225)
             {
                 if(isAttacking) {
-                    setAnimation(attack_south_west);
+                    setAnimation(animationLoader.getAttackAnimations().get("attack_south_west"));
                 }
                 else
-                    setAnimation(walking_south_west);
+                    setAnimation(animationLoader.getWalkAnimations().get("walking_south_west"));
             }
             else if (getFacingAngle() == 270)
             {
                 if(isAttacking) {
-                    setAnimation(attack_south);
+                    setAnimation(animationLoader.getAttackAnimations().get("attack_south"));
                 }
                 else
-                    setAnimation(walking_south);
+                    setAnimation(animationLoader.getWalkAnimations().get("walking_south"));
             }
             else if (getFacingAngle() == 315)
             {
                 if(isAttacking) {
-                    setAnimation(attack_south_east);
+                    setAnimation(animationLoader.getAttackAnimations().get("attack_south_east"));
                 }
                 else
-                    setAnimation(walking_south_east);
+                    setAnimation(animationLoader.getWalkAnimations().get("walking_south_east"));
             }
 
 
@@ -149,6 +138,7 @@ public abstract class BattleUnit extends BaseActor {
         healthBar.setPosition(getWidth()/ 2 - healthBar.getWidth() / 2, 83);
     }
 
+    /*
     protected void load_walk_animation(String mainPath, int numOfFiles, float frameDuration) {
         Array<TextureRegion> textureArray = new Array<TextureRegion>(true, numOfFiles, TextureRegion.class);
         //для северо-запада
@@ -224,7 +214,8 @@ public abstract class BattleUnit extends BaseActor {
         walking_south = new Animation(frameDuration, textureArray, Animation.PlayMode.LOOP);
         textureArray.clear();
     }
-
+*/
+    /*
     protected void load_attack_animation(String mainPath, int numOfFiles, float frameDuration) {
 
         Array<TextureRegion> textureArray = new Array<TextureRegion>(true, numOfFiles, TextureRegion.class);
@@ -301,6 +292,8 @@ public abstract class BattleUnit extends BaseActor {
         attack_south = new Animation(frameDuration, textureArray, Animation.PlayMode.NORMAL);
         textureArray.clear();
     }
+    */
+
     protected void load_death_animation(String mainPath, int numOfFiles, float frameDuration) {
         Array<TextureRegion> textureArray = new Array<TextureRegion>(true, numOfFiles, TextureRegion.class);
         for(int i = 0; i < numOfFiles; i++) {
@@ -359,4 +352,6 @@ public abstract class BattleUnit extends BaseActor {
     public void setDamage(float damage) {
         this.damage = damage;
     }
+
+
 }

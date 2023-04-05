@@ -13,15 +13,19 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.mygdx.game.framework.BaseGame;
 import com.mygdx.game.framework.BaseScreen;
 
+import java.io.FileNotFoundException;
+
 public class MenuScreen extends BaseScreen {
 
 
     @Override
     public void initialize() {
         //добавление фонового изображения
-        Texture backgroundTexture = new Texture(Gdx.files.internal("assets/mainmenu_ background.bmp"));
+
+        Texture backgroundTexture = new Texture(Gdx.files.internal("assets/mainmenu_background.bmp"));
         TextureRegion backgroundRegion = new TextureRegion(backgroundTexture);
         uiTable.setBackground(new TextureRegionDrawable(backgroundRegion));
+
 
         //добавление кнопок на главный экран
         Button.ButtonStyle playButtonStyle = new Button.ButtonStyle();
