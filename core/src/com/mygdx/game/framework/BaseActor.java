@@ -23,7 +23,6 @@ import java.util.ArrayList;
  * добавляет работу с текстурами, анимацией,
  * наложением многоугольников, движением, границами игрового мира, движением камеры.
  * Most game objects should extend this class.
- * @see #Actor
  */
 public class BaseActor extends Group
 {
