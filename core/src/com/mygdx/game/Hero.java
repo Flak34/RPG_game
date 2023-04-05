@@ -9,8 +9,6 @@ public class Hero extends BattleUnit {
     {
         super(x,y,s, animationLoader);
 
-        //load_walk_animation("hero_walking", 8, 0.08f);
-        //load_attack_animation("hero_attacking", 12, 0.04f);
         load_death_animation("hero_dying", 12, 0.07f);
 
         setAnimation(animationLoader.getWalkAnimations().get("walking_south"));

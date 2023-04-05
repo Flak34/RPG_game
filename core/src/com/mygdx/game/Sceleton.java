@@ -19,9 +19,8 @@ public class Sceleton extends BattleUnit {
     public Sceleton(float x, float y, Stage s, AbstractAnimationLoader animationLoader) {
 
         super(x,y,s, animationLoader);
-        //load_walk_animation("sceleton_walking", 8, 0.08f);
-        //load_attack_animation("sceleton_attacking", 10, 0.05f);
         load_death_animation("sceleton_dying", 9, 0.08f);
+
 
         startPoint = new Vector2(x + getWidth() / 2, y + getHeight() / 2);
         nodeIndex = 1;

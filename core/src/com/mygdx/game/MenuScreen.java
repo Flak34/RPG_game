@@ -2,18 +2,14 @@ package com.mygdx.game;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Event;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
-import com.mygdx.game.framework.BaseGame;
 import com.mygdx.game.framework.BaseScreen;
 
-import java.io.FileNotFoundException;
 
 public class MenuScreen extends BaseScreen {
 
@@ -37,6 +33,19 @@ public class MenuScreen extends BaseScreen {
 
         uiTable.row();
         uiTable.add().fillX().height(20);
+        uiTable.row();
+
+        //добавление кнопок на главный экран
+        playButtonStyle = new Button.ButtonStyle();
+        playButtonTex = new Texture( Gdx.files.internal("assets/buttons/play_button1.png") );
+        playButtonRegion = new TextureRegion(playButtonTex);
+        playButtonStyle.up = new TextureRegionDrawable( playButtonRegion );
+        Button playButton2 = new Button(playButtonStyle);
+        uiTable.add(playButton2);
+
+        uiTable.row();
+        uiTable.add().fillX().height(20);
+        uiTable.row();
 
         Button.ButtonStyle exitButtonStyle = new Button.ButtonStyle();
         Texture exitButtonTex = new Texture( Gdx.files.internal("assets/buttons/exit_button1.png") );
@@ -54,6 +63,17 @@ public class MenuScreen extends BaseScreen {
                             !((InputEvent)e).getType().equals(InputEvent.Type.touchDown) )
                         return false;
                     CrazyBerserkers.setActiveScreen( new LevelScreen() );
+                    return false;
+                }
+        );
+
+        playButton2.addListener(
+                (Event e) ->
+                {
+                    if ( !(e instanceof InputEvent) ||
+                            !((InputEvent)e).getType().equals(InputEvent.Type.touchDown) )
+                        return false;
+                    CrazyBerserkers.setActiveScreen( new PVPScreen() );
                     return false;
                 }
         );

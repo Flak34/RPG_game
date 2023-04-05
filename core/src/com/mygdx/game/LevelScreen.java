@@ -2,20 +2,15 @@ package com.mygdx.game;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.mygdx.game.animation_loaders.HeroAnimationLoader;
 import com.mygdx.game.animation_loaders.SceletonAnimationLoader;
-import com.mygdx.game.framework.BaseActor;
 import com.mygdx.game.framework.BaseScreen;
 import com.mygdx.game.framework.TilemapActor;
 import com.mygdx.game.gameai.gamepf.GamePathFinder;
 
-import java.awt.*;
 import java.util.ArrayList;
 
 public class LevelScreen extends BaseScreen {
@@ -29,7 +24,6 @@ public class LevelScreen extends BaseScreen {
 
     @Override
     public void initialize() {
-        int count = 0;
 
         TilemapActor tma = new TilemapActor("assets/map.tmx", mainStage);
         pathFinder = new GamePathFinder(new TmxMapLoader().load("assets/map.tmx"));
@@ -50,7 +44,6 @@ public class LevelScreen extends BaseScreen {
         sceletons = new ArrayList<>();
         for(MapObject enemyStartPoint: tma.getRectangleList("enemyStart")) {
             MapProperties enemyStartProps = enemyStartPoint.getProperties();
-            count++;
             Sceleton sceleton = new Sceleton((float) enemyStartProps.get("x"), (float)enemyStartProps.get("y"), mainStage, sceletonAnimationLoader);
             sceleton.setDamage(300);
             sceletons.add(sceleton);
@@ -89,7 +82,6 @@ public class LevelScreen extends BaseScreen {
         for (int i = 0; i < walls.size(); i++)
         {
             hero.preventOverlap(walls.get(i));
-
 
             for(int j = 0; j < sceletons.size(); j++) {
                 sceletons.get(j).preventOverlap(walls.get(i));

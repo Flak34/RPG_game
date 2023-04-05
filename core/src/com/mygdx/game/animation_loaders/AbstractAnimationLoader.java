@@ -7,7 +7,6 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Array;
 
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public abstract class AbstractAnimationLoader {
